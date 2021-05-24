@@ -1,19 +1,9 @@
 --1.  List the following details of each employee: employee number, last name, 
 -- first name, sex, and salary.
-
--- Create view from query
-CREATE VIEW employee_data AS
-SELECT e.emp_no, e.last_name, e.first_name, s.salary
+SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
 FROM employees AS e
   JOIN salaries AS s
-  ON (e.emp_no = s.emp_no)
-
--- Query the table view created
-SELECT * 
-FROM employee_data;
-
--- Drop view
--- DROP VIEW employee_data;
+  	ON (e.emp_no = s.emp_no);
 
 ---- END QUERY 1 ----
 
@@ -23,57 +13,41 @@ SELECT first_name, last_name, hire_date
 FROM employees
 WHERE hire_date > '1985-12-31'
 and hire_date < '1987-01-01'
-ORDER BY hire_date
+ORDER BY hire_date;
 
 ---- END QUERY 2 ----
 
 
 -- 3. List the manager of each department with the following information: department number, 
 -- department name, the manager's employee number, last name, first name.
-
-CREATE VIEW manager_data AS
 SELECT d.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
 FROM departments AS d
 	JOIN dept_manager AS dm
 	ON (d.dept_no = dm.dept_no)
 	  JOIN employees AS e
-	  ON (dm.emp_no = e.emp_no)
-
--- Query the table view created
-SELECT *
-FROM manager_data;
-
--- Drop view
-DROP VIEW manager_data;
+	  ON (dm.emp_no = e.emp_no);
 
 ---- END QUERY 3 -----
 
+
 -- 4. List the department of each employee with the following information: employee number, 
 -- last name, first name, and department name.
-CREATE VIEW dept_each_employee AS
 SELECT e.emp_no, e.last_name, e.first_name, d.dept_name
 FROM departments AS d
 	JOIN dept_manager AS dm
 	ON (d.dept_no = dm.dept_no)
 	  JOIN employees AS e
-	  ON (dm.emp_no = e.emp_no)
-
--- Query the table view created
-SELECT *
-FROM dept_each_employee;
-
--- Drop view
-DROP VIEW dept_each_employee;
+	  ON (dm.emp_no = e.emp_no);
 
 ---- END QUERY 4 ----
 
 
 -- 5. List first name, last name, and sex for employees whose first name is "Hercules" and last 
 -- names begin with "B."
-SELECT first_name, last_name
+SELECT first_name, last_name, sex
 FROM employees
 WHERE first_name = 'Hercules'
-and last_name like 'B%'
+and last_name like 'B%';
 
 ---- END QUERY 5 ----
 
@@ -86,12 +60,12 @@ FROM departments AS d
 	JOIN dept_emp AS de
 	ON (d.dept_no = de.dept_no)
 	  JOIN employees AS e
-	  ON (de.emp_no = e.emp_no)
+	  ON (de.emp_no = e.emp_no);
 
 -- Query the table view created
 SELECT *
 FROM sales_dept_employees
-WHERE dept_name = 'Sales'
+WHERE dept_name = 'Sales';
 
 ---- END QUERY 6 ----
 
@@ -101,7 +75,7 @@ WHERE dept_name = 'Sales'
 SELECT *
 FROM sales_dept_employees
 WHERE dept_name = 'Sales'
-OR dept_name = 'Development'
+OR dept_name = 'Development';
 
 -- Drop view
 DROP VIEW sales_dept_employees;
@@ -114,8 +88,9 @@ DROP VIEW sales_dept_employees;
 SELECT last_name, count(last_name)
 FROM employees 
 GROUP BY last_name
-ORDER BY count DESC
+ORDER BY count DESC;
 
 ---- END QUERY 8 ----
 
 ---- THANKS FOR GRADING :) -----
+---- HAVE A GOOD DAY ----
